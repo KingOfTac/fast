@@ -742,9 +742,6 @@ export class DelegatesARIATextbox {
 export interface DelegatesARIATextbox extends ARIAGlobalStatesAndProperties {
 }
 
-// @alpha
-export type DerivedDesignTokenValue<T> = T extends Function ? never : (target: HTMLElement) => T;
-
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
 // Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "DelegatesARIAToolbar" because one of its declarations is marked as @internal
 //
@@ -757,6 +754,9 @@ export class DelegatesARIAToolbar {
 // @internal
 export interface DelegatesARIAToolbar extends ARIAGlobalStatesAndProperties {
 }
+
+// @alpha
+export type DerivedDesignTokenValue<T> = T extends Function ? never : (target: HTMLElement) => T;
 
 // @alpha (undocumented)
 export class DesignSystem {
