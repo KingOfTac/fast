@@ -745,6 +745,19 @@ export interface DelegatesARIATextbox extends ARIAGlobalStatesAndProperties {
 // @alpha
 export type DerivedDesignTokenValue<T> = T extends Function ? never : (target: HTMLElement) => T;
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "DelegatesARIAToolbar" because one of its declarations is marked as @internal
+//
+// @public
+export class DelegatesARIAToolbar {
+    ariaLabel: string;
+    ariaLabelledby: string;
+}
+
+// @internal
+export interface DelegatesARIAToolbar extends ARIAGlobalStatesAndProperties {
+}
+
 // @alpha (undocumented)
 export class DesignSystem {
     // (undocumented)
@@ -2048,6 +2061,43 @@ export enum TextFieldType {
     text = "text",
     url = "url"
 }
+
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "Toolbar" because one of its declarations is marked as @internal
+//
+// @public
+export class Toolbar extends FASTElement {
+    // @internal (undocumented)
+    get activeIndex(): number;
+    set activeIndex(value: number);
+    // @internal (undocumented)
+    connectedCallback(): void;
+    // @internal (undocumented)
+    direction: Direction;
+    disabled: boolean;
+    // @internal (undocumented)
+    handleClick(e: MouseEvent): boolean | void;
+    // @internal (undocumented)
+    handleFocusin(e: FocusEvent): boolean | void;
+    // @internal (undocumented)
+    handleKeydown(e: KeyboardEvent): boolean | void;
+    // (undocumented)
+    get lastFocusableElementIndex(): number;
+    orientation: Orientation;
+    // @internal (undocumented)
+    slottedLabel: HTMLElement[];
+    // @internal (undocumented)
+    slottedToolbarItems: HTMLElement[];
+    // (undocumented)
+    protected slottedToolbarItemsChanged(prev: unknown, next: HTMLElement[]): void;
+}
+
+// @internal (undocumented)
+export interface Toolbar extends StartEnd, DelegatesARIAToolbar {
+}
+
+// @public
+export const ToolbarTemplate: ViewTemplate<Toolbar>;
 
 // @public
 export class Tooltip extends FASTElement {
