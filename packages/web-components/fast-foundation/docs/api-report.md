@@ -2067,12 +2067,12 @@ export enum TextFieldType {
 //
 // @public
 export class Toolbar extends FASTElement {
-    // @internal (undocumented)
+    // @internal
     get activeIndex(): number;
     set activeIndex(value: number);
     // @internal (undocumented)
     connectedCallback(): void;
-    // @internal (undocumented)
+    // @internal
     direction: Direction;
     disabled: boolean;
     // @internal (undocumented)
@@ -2081,14 +2081,11 @@ export class Toolbar extends FASTElement {
     handleFocusin(e: FocusEvent): boolean | void;
     // @internal (undocumented)
     handleKeydown(e: KeyboardEvent): boolean | void;
-    // (undocumented)
-    get lastFocusableElementIndex(): number;
     orientation: Orientation;
-    // @internal (undocumented)
+    // @internal
     slottedLabel: HTMLElement[];
-    // @internal (undocumented)
+    // @internal
     slottedToolbarItems: HTMLElement[];
-    // (undocumented)
     protected slottedToolbarItemsChanged(prev: unknown, next: HTMLElement[]): void;
 }
 

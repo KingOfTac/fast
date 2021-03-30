@@ -157,7 +157,7 @@ export const keyEscape = "Escape";
 export const keySpace = " ";
 export const keyTab = "Tab";
 
-export const enum ArrowKeys {
+export enum ArrowKeys {
     ArrowDown = "ArrowDown",
     ArrowLeft = "ArrowLeft",
     ArrowRight = "ArrowRight",

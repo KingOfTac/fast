@@ -1,13 +1,5 @@
-import { attr, DOM, FASTElement, observable, Observable } from "@microsoft/fast-element";
-import {
-    ArrowKeys,
-    Direction,
-    keyArrowDown,
-    keyArrowLeft,
-    keyArrowRight,
-    keyArrowUp,
-    Orientation,
-} from "@microsoft/fast-web-utilities";
+import { attr, FASTElement, observable, Observable } from "@microsoft/fast-element";
+import { ArrowKeys, Direction, Orientation } from "@microsoft/fast-web-utilities";
 import { clamp } from "lodash-es";
 import { isFocusable } from "tabbable";
 import { ARIAGlobalStatesAndProperties } from "../patterns/aria-global";
@@ -24,6 +16,8 @@ import { DirectionInverter, OrientationKeyMapping } from "./toolbar.options";
  */
 export class Toolbar extends FASTElement {
     /**
+     * The text direction of the toolbar.
+     *
      * @internal
      */
     @observable
@@ -40,13 +34,11 @@ export class Toolbar extends FASTElement {
     public disabled: boolean;
 
     /**
+     * The collection of focusable toolbar controls.
+     *
      * @internal
      */
     private focusableElements: Array<HTMLElement | SVGElement>;
-
-    public get lastFocusableElementIndex(): number {
-        return this.focusableElements.length - 1;
-    }
 
     /**
      * @internal
@@ -54,6 +46,8 @@ export class Toolbar extends FASTElement {
     private _activeIndex: number = 0;
 
     /**
+     * The index of the currently focused element, clamped between 0 and the last element.
+     *
      * @internal
      */
     get activeIndex(): number {
@@ -69,6 +63,15 @@ export class Toolbar extends FASTElement {
     }
 
     /**
+     * Returns the index of the last focusable element.
+     *
+     * @internal
+     */
+    private get lastFocusableElementIndex(): number {
+        return this.focusableElements.length - 1;
+    }
+
+    /**
      * The orientation of the toolbar.
      *
      * @public
@@ -79,20 +82,29 @@ export class Toolbar extends FASTElement {
     public orientation: Orientation = Orientation.horizontal;
 
     /**
+     * The elements in the label slot.
+     *
      * @internal
      */
     @observable
     public slottedLabel: HTMLElement[];
 
     /**
+     * The elements in the default slot.
+     *
      * @internal
      */
     @observable
     public slottedToolbarItems: HTMLElement[];
+
+    /**
+     * Prepare the slotted elements which can be focusable.
+     *
+     * @param prev - The previous list of slotted elements.
+     * @param next - The new list of slotted elements.
+     */
     protected slottedToolbarItemsChanged(prev: unknown, next: HTMLElement[]): void {
-        this.focusableElements = next.filter(
-            n => isFocusable(n) || n.getAttribute("role") === "radiogroup"
-        );
+        this.focusableElements = next.filter(n => isFocusable(n));
         this.setFocusableElements();
     }
 
@@ -126,24 +138,19 @@ export class Toolbar extends FASTElement {
             return;
         }
 
-        if (this.focusableElements[this.activeIndex] && !e.defaultPrevented) {
-            this.focusableElements[this.activeIndex].focus();
+        if (!e.defaultPrevented) {
+            this.setFocusedElement();
         }
 
         return true;
     }
 
     /**
+     *
      * @internal
      */
     public handleClick(e: MouseEvent): boolean | void {
-        const activeIndex = this.focusableElements.indexOf(e.target as HTMLElement);
-        if (activeIndex !== -1) {
-            this.activeIndex = activeIndex;
-            DOM.queueUpdate(() => {
-                this.focusableElements[this.activeIndex].focus();
-            });
-        }
+        this.setFocusedElement(this.focusableElements.indexOf(e.target as HTMLElement));
 
         return true;
     }
@@ -152,30 +159,19 @@ export class Toolbar extends FASTElement {
      * @internal
      */
     public handleKeydown(e: KeyboardEvent): boolean | void {
-        const { key } = e;
+        const key = e.key;
 
-        if (!this.contains(document.activeElement as HTMLElement)) {
-            return true;
-        }
+        if (
+            key in ArrowKeys &&
+            !e.defaultPrevented &&
+            this.contains(document.activeElement)
+        ) {
+            const incrementer = this.getDirectionalIncrementerForArrowKey(
+                key as ArrowKeys
+            );
 
-        switch (key) {
-            case keyArrowDown:
-            case keyArrowLeft:
-            case keyArrowRight:
-            case keyArrowUp: {
-                if (!e.defaultPrevented) {
-                    const incrementer = this.getDirectionalIncrementerForArrowKey(
-                        key as ArrowKeys
-                    );
-                    if (incrementer) {
-                        this.incrementActiveIndex(incrementer);
-                    }
-                    break;
-                }
-            }
-
-            default: {
-                break;
+            if (incrementer !== 0) {
+                this.setFocusedElement(this.activeIndex + incrementer);
             }
         }
 
@@ -185,12 +181,10 @@ export class Toolbar extends FASTElement {
     /**
      * @internal
      */
-    private incrementActiveIndex(incrementer: number) {
-        this.activeIndex += incrementer;
+    private setFocusedElement(activeIndex: number = this.activeIndex) {
+        this.activeIndex = activeIndex;
         if (this.focusableElements[this.activeIndex]) {
-            DOM.queueUpdate(() => {
-                this.focusableElements[this.activeIndex].focus();
-            });
+            this.focusableElements[this.activeIndex].focus();
         }
     }
 
@@ -200,7 +194,7 @@ export class Toolbar extends FASTElement {
     private setFocusableElements() {
         if (this.focusableElements.length) {
             this.focusableElements.forEach(f => (f.tabIndex = -1));
-            this.focusableElements[this._activeIndex].tabIndex = 0;
+            this.focusableElements[this.activeIndex].tabIndex = 0;
         }
     }
 }
