@@ -1,0 +1,55 @@
+<h1>Toolbar</h1>
+
+<h2>Default</h2>
+<fast-toolbar>
+    <fast-checkbox>Button</fast-checkbox>
+    <fast-radio-group orientation="vertical">
+        <fast-radio value="One">Option One</fast-radio>
+        <fast-radio value="Two">Option Two</fast-radio>
+        <fast-radio value="Three">Option Three</fast-radio>
+        <fast-radio value="Four">Option Four</fast-radio>
+        <fast-radio value="Five">Option Five</fast-radio>
+        <fast-radio value="Six">Option Six</fast-radio>
+    </fast-radio-group>
+    <fast-select>
+        <fast-option>This option has no value</fast-option>
+        <fast-option disabled>This option is disabled</fast-option>
+        <fast-option value="hi">This option has a value</fast-option>
+        <fast-option selected>This option is selected by default</fast-option>
+    </fast-select>
+</fast-toolbar>
+
+<h2>Vertical orientation</h2>
+<fast-toolbar orientation="vertical">
+    <fast-checkbox>Button</fast-checkbox>
+    <fast-checkbox>Button</fast-checkbox>
+    <fast-select>
+        <fast-option>This option has no value</fast-option>
+        <fast-option disabled>This option is disabled</fast-option>
+        <fast-option value="hi">This option has a value</fast-option>
+        <fast-option selected>This option is selected by default</fast-option>
+    </fast-select>
+</fast-toolbar>
+
+<h2>Mixed elements</h2>
+<fast-toolbar>
+    <label slot="label">Mixed elements</label>
+    <fast-radio-group name="numbers">
+        <label slot="label">Numbers</label>
+        <fast-radio value="one">One</fast-radio>
+        <fast-radio value="two">Two</fast-radio>
+    </fast-radio-group>
+</fast-toolbar>
+
+<fast-toolbar>
+    <div class="group">
+        <fast-button tabindex="0">Button</fast-button>
+    </div>
+</fast-toolbar>
+
+<h2>RTL Mode</h2>
+<fast-toolbar dir="rtl">
+    <fast-checkbox>One</fast-checkbox>
+    <fast-checkbox>Two</fast-checkbox>
+    <fast-checkbox>Three</fast-checkbox>
+</fast-toolbar>
