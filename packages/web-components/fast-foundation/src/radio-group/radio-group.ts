@@ -248,7 +248,7 @@ export class RadioGroup extends FASTElement {
     };
 
     private moveRightOffGroup = () => {
-        (this.nextElementSibling as HTMLInputElement).focus();
+        (this.nextElementSibling as HTMLInputElement)?.focus();
     };
 
     private moveLeftOffGroup = () => {
