@@ -25,10 +25,6 @@ export const ToolbarStyles: ElementStyles = css`
         outline: calc(var(--outline-width) * 1px) solid ${neutralOutlineFocusBehavior.var};
     }
 
-    :host *:focus {
-        outline: 1px solid #f0f;
-    }
-
     :host([orientation="vertical"]) ::slotted(:not([slot])) {
         margin: var(--grid-gap) 0;
     }
@@ -38,8 +34,10 @@ export const ToolbarStyles: ElementStyles = css`
     }
 
     .positioning-region {
-        display: flex;
-        flex-flow: row wrap;
+        align-items: flex-start;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: flex-start;
     }
 
     :host([orientation="vertical"]) .positioning-region {
