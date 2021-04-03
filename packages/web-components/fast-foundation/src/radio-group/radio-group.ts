@@ -136,7 +136,7 @@ export class RadioGroup extends FASTElement {
         super.connectedCallback();
         this.direction = getDirection(this);
         this.setupRadioButtons();
-        this.parentToolbar = this.parentElement?.closest('[role="toolbar"]');
+        this.parentToolbar = this.closest<HTMLElement>('[role="toolbar"]');
         this.isInsideToolbar =
             this.parentToolbar !== undefined && this.parentToolbar !== null;
     }
@@ -279,13 +279,15 @@ export class RadioGroup extends FASTElement {
                     }
                 });
             } else {
-                this.selectedRadio.setAttribute("tabindex", "0");
                 this.focusedRadio = this.selectedRadio;
-                group.forEach((nextRadio: HTMLInputElement) => {
-                    if (nextRadio !== this.selectedRadio) {
-                        nextRadio.setAttribute("tabindex", "-1");
-                    }
-                });
+                if (!this.isInsideToolbar) {
+                    this.selectedRadio.setAttribute("tabindex", "0");
+                    group.forEach((nextRadio: HTMLInputElement) => {
+                        if (nextRadio !== this.selectedRadio) {
+                            nextRadio.setAttribute("tabindex", "-1");
+                        }
+                    });
+                }
             }
         }
         return true;
@@ -413,6 +415,9 @@ export class RadioGroup extends FASTElement {
                 break;
             case keyCodeArrowRight:
             case keyCodeArrowDown:
+                if (this.isInsideToolbar) {
+                    return true;
+                }
                 if (this.direction === Direction.ltr) {
                     this.moveRight(e);
                 } else {
@@ -421,6 +426,9 @@ export class RadioGroup extends FASTElement {
                 break;
             case keyCodeArrowLeft:
             case keyCodeArrowUp:
+                if (this.isInsideToolbar) {
+                    return true;
+                }
                 if (this.direction === Direction.ltr) {
                     this.moveLeft(e);
                 } else {

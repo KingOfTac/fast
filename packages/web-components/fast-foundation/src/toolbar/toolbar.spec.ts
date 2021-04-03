@@ -11,7 +11,10 @@ import { Toolbar, ToolbarTemplate } from "./index";
 class FASTToolbar extends Toolbar {}
 
 async function setup() {
-  return await fixture<FASTToolbar>("fast-toolbar");
+  const { element, connect, disconnect, parent } = await fixture<FASTToolbar>(
+    "fast-toolbar"
+  );
+  return { element, connect, disconnect, document, parent };
 }
 
 describe("Toolbar", () => {

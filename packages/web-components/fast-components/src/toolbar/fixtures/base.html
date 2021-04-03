@@ -2,49 +2,76 @@
 
 <h2>Default</h2>
 <fast-toolbar>
-    <fast-checkbox>Button</fast-checkbox>
-    <fast-radio-group orientation="vertical">
-        <fast-radio value="One">Option One</fast-radio>
-        <fast-radio value="Two">Option Two</fast-radio>
-        <fast-radio value="Three">Option Three</fast-radio>
-        <fast-radio value="Four">Option Four</fast-radio>
-        <fast-radio value="Five">Option Five</fast-radio>
-        <fast-radio value="Six">Option Six</fast-radio>
-    </fast-radio-group>
-    <fast-select>
-        <fast-option>This option has no value</fast-option>
-        <fast-option disabled>This option is disabled</fast-option>
-        <fast-option value="hi">This option has a value</fast-option>
-        <fast-option selected>This option is selected by default</fast-option>
-    </fast-select>
+    <fast-number-field min="8" max="72" value="12" style="width: fit-content;">
+        Font Size
+    </fast-number-field>
+    <fast-checkbox>One</fast-checkbox>
+    <fast-checkbox>Two</fast-checkbox>
+    <fast-checkbox>Three</fast-checkbox>
 </fast-toolbar>
+
+<h2>Toolbar with slotted label</h2>
+<fast-toolbar id="toolbar-with-slotted-label">
+    <label slot="label">Slotted label</label>
+</fast-toolbar>
+
+<h2>Toolbar with external label</h2>
+<label id="toolbar-label" for="toolbar-with-external-label">External label</label>
+<fast-toolbar
+    id="toolbar-with-external-label"
+    aria-labelledby="toolbar-label"
+></fast-toolbar>
+
+<h2>Toolbar with invisible label</h2>
+<fast-toolbar
+    id="toolbar-with-invisible-label"
+    aria-label="Invisible label"
+></fast-toolbar>
 
 <h2>Vertical orientation</h2>
 <fast-toolbar orientation="vertical">
-    <fast-checkbox>Button</fast-checkbox>
-    <fast-checkbox>Button</fast-checkbox>
-    <fast-select>
-        <fast-option>This option has no value</fast-option>
-        <fast-option disabled>This option is disabled</fast-option>
-        <fast-option value="hi">This option has a value</fast-option>
-        <fast-option selected>This option is selected by default</fast-option>
-    </fast-select>
+    <fast-button>One</fast-button>
+    <fast-button>Two</fast-button>
+    <fast-button>Three</fast-button>
 </fast-toolbar>
 
-<h2>Mixed elements</h2>
+<h2>Mixed Items</h2>
 <fast-toolbar>
-    <label slot="label">Mixed elements</label>
-    <fast-radio-group name="numbers">
-        <label slot="label">Numbers</label>
-        <fast-radio value="one">One</fast-radio>
-        <fast-radio value="two">Two</fast-radio>
+    <fast-button>Button</fast-button>
+    <fast-radio-group>
+        <fast-radio checked>One</fast-radio>
+        <fast-radio>Two</fast-radio>
+        <fast-radio>Three</fast-radio>
     </fast-radio-group>
+    <fast-combobox>
+        <fast-option>Please Please Me</fast-option>
+        <fast-option>With The Beatles</fast-option>
+        <fast-option>A Hard Day's Night</fast-option>
+        <fast-option>Beatles for Sale</fast-option>
+        <fast-option>Help!</fast-option>
+        <fast-option>Rubber Soul</fast-option>
+        <fast-option>Revolver</fast-option>
+        <fast-option>Sgt. Pepper's Lonely Hearts Club Band</fast-option>
+        <fast-option>Magical Mystery Tour</fast-option>
+        <fast-option>The Beatles</fast-option>
+        <fast-option>Yellow Submarine</fast-option>
+        <fast-option>Abbey Road</fast-option>
+        <fast-option>Let It Be</fast-option>
+    </fast-combobox>
+    <fast-button>Button</fast-button>
+    <fast-select>
+        <fast-option>Option 1</fast-option>
+        <fast-option>Second option</fast-option>
+        <fast-option>Option 3</fast-option>
+    </fast-select>
+    <fast-checkbox>Checkbox</fast-checkbox>
 </fast-toolbar>
 
+<h2>Disabled Elements</h2>
 <fast-toolbar>
-    <div class="group">
-        <fast-button tabindex="0">Button</fast-button>
-    </div>
+    <fast-checkbox>Two</fast-checkbox>
+    <fast-checkbox disabled>One</fast-checkbox>
+    <fast-checkbox>Three</fast-checkbox>
 </fast-toolbar>
 
 <h2>RTL Mode</h2>

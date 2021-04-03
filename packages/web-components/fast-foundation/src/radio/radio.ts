@@ -180,7 +180,7 @@ export class Radio extends FormAssociatedRadio implements RadioControl {
     /**
      * @internal
      */
-    public keypressHandler = (e: KeyboardEvent): void => {
+    public keypressHandler = (e: KeyboardEvent): boolean | void => {
         switch (e.keyCode) {
             case keyCodeSpace:
                 if (!this.checked && !this.readOnly) {
@@ -188,6 +188,8 @@ export class Radio extends FormAssociatedRadio implements RadioControl {
                 }
                 break;
         }
+
+        return true;
     };
 
     /**

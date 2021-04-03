@@ -1513,7 +1513,7 @@ export class Radio extends FormAssociatedRadio implements RadioControl {
     // @internal
     initialValue: string;
     // @internal (undocumented)
-    keypressHandler: (e: KeyboardEvent) => void;
+    keypressHandler: (e: KeyboardEvent) => boolean | void;
     name: string;
     readOnly: boolean;
     }
@@ -2074,19 +2074,19 @@ export class Toolbar extends FASTElement {
     connectedCallback(): void;
     // @internal
     direction: Direction;
-    disabled: boolean;
-    // @internal (undocumented)
+    // @internal
     handleClick(e: MouseEvent): boolean | void;
-    // @internal (undocumented)
+    // @internal
     handleFocusin(e: FocusEvent): boolean | void;
-    // @internal (undocumented)
+    // @internal
     handleKeydown(e: KeyboardEvent): boolean | void;
     orientation: Orientation;
     // @internal
-    slottedLabel: HTMLElement[];
+    slottedItems: HTMLElement[];
     // @internal
-    slottedToolbarItems: HTMLElement[];
-    protected slottedToolbarItemsChanged(prev: unknown, next: HTMLElement[]): void;
+    protected slottedItemsChanged(prev: unknown, next: HTMLElement[]): void;
+    // @internal
+    slottedLabel: HTMLElement[];
 }
 
 // @internal (undocumented)

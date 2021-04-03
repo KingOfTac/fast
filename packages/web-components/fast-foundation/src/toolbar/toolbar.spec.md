@@ -61,46 +61,31 @@ Used anywhere someone may want to visually and structurally group related intera
 
 ```html
 <h3 id="label">Toolbar visible label</h3>
-<fast-toolbar
-    orientation="horizontal" 
-    aria-labelledby="label"
->
-    <div>
-        <fast-button>Bold</fast-button>
-        <fast-button>Italic</fast-button>
-        <fast-button>Underline</fast-button>
-    </div>
-    <select>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 2</option>
-    </select>
-    <div>
-        <fast-button>More</fast-button>
-    </div>
+<fast-toolbar aria-labelledby="label">
+    <fast-button>A button</fast-button>
+    <fast-checkbox>A checkbox</fast-checkbox>
+    <fast-checkbox>Another checkbox</fast-checkbox>
+</fast-toolbar>
+```
+
+**With slotted label:**
+
+```html
+<fast-toolbar>
+    <label slot="label">Toolbar slotted label</label>
+    <fast-button>A button</fast-button>
+    <fast-checkbox>A checkbox</fast-checkbox>
+    <fast-checkbox>Another checkbox</fast-checkbox>
 </fast-toolbar>
 ```
 
 **With invisible label:**
 
 ```html
-<fast-toolbar
-    orientation="horizontal" 
-    aria-label="Toolbar label"
->
-    <div>
-        <fast-button>Bold</fast-button>
-        <fast-button>Italic</fast-button>
-        <fast-button>Underline</fast-button>
-    </div>
-    <select>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 2</option>
-    </select>
-    <div>
-        <fast-button>More</fast-button>
-    </div>
+<fast-toolbar aria-label="Toolbar label">
+    <fast-button>A button</fast-button>
+    <fast-checkbox>A checkbox</fast-checkbox>
+    <fast-checkbox>Another checkbox</fast-checkbox>
 </fast-toolbar>
 ```
 

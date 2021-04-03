@@ -23,7 +23,7 @@ export const ToolbarTemplate: ViewTemplate<Toolbar> = html`
             <slot
                 ${slotted({
                     filter: elements(),
-                    property: "slottedToolbarItems",
+                    property: "slottedItems",
                 })}
             ></slot>
         </div>

@@ -1,9 +1,14 @@
 import { attr, FASTElement, observable, Observable } from "@microsoft/fast-element";
-import { ArrowKeys, Direction, Orientation } from "@microsoft/fast-web-utilities";
+import { ArrowKeys, Direction, keyTab, Orientation } from "@microsoft/fast-web-utilities";
 import { clamp } from "lodash-es";
 import { isFocusable } from "tabbable";
+import type { Anchor } from "../anchor/anchor";
+import type { Button } from "../button/button";
+import type { Combobox } from "../combobox/combobox";
 import { ARIAGlobalStatesAndProperties } from "../patterns/aria-global";
 import { StartEnd } from "../patterns/start-end";
+import type { TextArea } from "../text-area/text-area";
+import type { TextField } from "../text-field/text-field";
 import { applyMixins } from "../utilities/apply-mixins";
 import { getDirection } from "../utilities/direction";
 import { DirectionInverter, OrientationKeyMapping } from "./toolbar.options";
@@ -24,23 +29,15 @@ export class Toolbar extends FASTElement {
     public direction: Direction = Direction.ltr;
 
     /**
-     * The disabled state of the toolbar.
-     *
-     * @public
-     * @remarks
-     * HTML Attribute: disabled
-     */
-    @attr
-    public disabled: boolean;
-
-    /**
      * The collection of focusable toolbar controls.
      *
      * @internal
      */
-    private focusableElements: Array<HTMLElement | SVGElement>;
+    private focusableElements: HTMLElement[];
 
     /**
+     * The internal index of the currently focused element.
+     *
      * @internal
      */
     private _activeIndex: number = 0;
@@ -56,10 +53,10 @@ export class Toolbar extends FASTElement {
     }
 
     set activeIndex(value: number) {
-        this._activeIndex = clamp(value, 0, this.lastFocusableElementIndex);
-        Observable.notify(this, "activeIndex");
-
-        this.setFocusableElements();
+        if (this.$fastController.isConnected) {
+            this._activeIndex = clamp(value, 0, this.lastFocusableElementIndex);
+            Observable.notify(this, "activeIndex");
+        }
     }
 
     /**
@@ -76,7 +73,7 @@ export class Toolbar extends FASTElement {
      *
      * @public
      * @remarks
-     * HTML Attribute: orientation
+     * HTML Attribute: `orientation`
      */
     @attr
     public orientation: Orientation = Orientation.horizontal;
@@ -95,17 +92,19 @@ export class Toolbar extends FASTElement {
      * @internal
      */
     @observable
-    public slottedToolbarItems: HTMLElement[];
+    public slottedItems: HTMLElement[];
 
     /**
      * Prepare the slotted elements which can be focusable.
      *
      * @param prev - The previous list of slotted elements.
      * @param next - The new list of slotted elements.
+     * @internal
      */
-    protected slottedToolbarItemsChanged(prev: unknown, next: HTMLElement[]): void {
-        this.focusableElements = next.filter(n => isFocusable(n));
-        this.setFocusableElements();
+    protected slottedItemsChanged(prev: unknown, next: HTMLElement[]): void {
+        if (this.$fastController.isConnected) {
+            this.setFocusableElements();
+        }
     }
 
     /**
@@ -114,7 +113,6 @@ export class Toolbar extends FASTElement {
     public connectedCallback() {
         super.connectedCallback();
         this.direction = getDirection(this);
-        this._activeIndex = 0;
     }
 
     /**
@@ -124,52 +122,55 @@ export class Toolbar extends FASTElement {
      * @param key - The event key value
      * @internal
      */
-    private getDirectionalIncrementerForArrowKey = (key: ArrowKeys): number =>
+    private getDirectionalIncrementerForArrowKey = (key: ArrowKeys | string): number =>
         OrientationKeyMapping[this.orientation][key] *
             DirectionInverter[this.direction] || 0;
 
     /**
+     * When the toolbar receives focus, set the currently active element as focused.
+     *
      * @internal
      */
     public handleFocusin(e: FocusEvent): boolean | void {
         const relatedTarget = e.relatedTarget as HTMLElement;
-
-        if (!relatedTarget || this.isSameNode(relatedTarget)) {
+        if (!relatedTarget || this.contains(relatedTarget)) {
             return;
         }
 
         if (!e.defaultPrevented) {
             this.setFocusedElement();
         }
-
-        return true;
     }
 
     /**
+     * Set the activeIndex when a focusable element in the toolbar is clicked.
      *
      * @internal
      */
     public handleClick(e: MouseEvent): boolean | void {
-        this.setFocusedElement(this.focusableElements.indexOf(e.target as HTMLElement));
+        const captured = e.target as HTMLElement;
+        const activeIndex = this.focusableElements?.indexOf(captured);
+        if (activeIndex > -1 && this.activeIndex !== activeIndex) {
+            this.setFocusedElement(activeIndex);
+        }
 
         return true;
     }
 
     /**
+     * Handle keyboard events for the toolbar.
+     *
      * @internal
      */
     public handleKeydown(e: KeyboardEvent): boolean | void {
         const key = e.key;
 
-        if (
-            key in ArrowKeys &&
-            !e.defaultPrevented &&
-            this.contains(document.activeElement)
-        ) {
-            const incrementer = this.getDirectionalIncrementerForArrowKey(
-                key as ArrowKeys
-            );
+        if (e.shiftKey && key !== keyTab) {
+            e.preventDefault();
+        }
 
+        if (!e.defaultPrevented && key in ArrowKeys) {
+            const incrementer = this.getDirectionalIncrementerForArrowKey(key);
             if (incrementer !== 0) {
                 this.setFocusedElement(this.activeIndex + incrementer);
             }
@@ -179,22 +180,45 @@ export class Toolbar extends FASTElement {
     }
 
     /**
+     * Set the activeIndex and focus the corresponding control.
+     *
+     * @param activeIndex - The new index to set
      * @internal
      */
-    private setFocusedElement(activeIndex: number = this.activeIndex) {
+    private setFocusedElement(activeIndex: number = this.activeIndex): void {
         this.activeIndex = activeIndex;
+        this.setFocusableElements();
         if (this.focusableElements[this.activeIndex]) {
             this.focusableElements[this.activeIndex].focus();
         }
     }
 
+    private static reduceItems(
+        elements: HTMLElement[],
+        element: Anchor | Button | Combobox | TextArea | TextField
+    ) {
+        if (element.getAttribute("role") === "radiogroup") {
+            return elements.concat(Array.from(element.querySelectorAll("[role=radio]")));
+        }
+
+        if (isFocusable(element) || (element.control && isFocusable(element.control))) {
+            elements.push(element);
+        }
+
+        return elements;
+    }
+
     /**
      * @internal
      */
-    private setFocusableElements() {
-        if (this.focusableElements.length) {
-            this.focusableElements.forEach(f => (f.tabIndex = -1));
-            this.focusableElements[this.activeIndex].tabIndex = 0;
+    private setFocusableElements(): void {
+        if (this.$fastController.isConnected) {
+            this.focusableElements = this.slottedItems.reduce(Toolbar.reduceItems, []);
+            if (this.focusableElements.length > 0) {
+                this.focusableElements.forEach((element, index) => {
+                    element.tabIndex = this.activeIndex === index ? 0 : -1;
+                });
+            }
         }
     }
 }
