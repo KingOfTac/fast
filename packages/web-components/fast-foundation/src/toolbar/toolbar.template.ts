@@ -1,5 +1,6 @@
 import { elements, html, slotted } from "@microsoft/fast-element";
 import type { ViewTemplate } from "@microsoft/fast-element";
+import { endTemplate, startTemplate } from "../patterns";
 import type { Toolbar } from "./toolbar";
 
 /**
@@ -20,12 +21,14 @@ export const ToolbarTemplate: ViewTemplate<Toolbar> = html`
     >
         <slot name="label"></slot>
         <div class="positioning-region" part="positioning-region">
+            ${startTemplate}
             <slot
                 ${slotted({
                     filter: elements(),
                     property: "slottedItems",
                 })}
             ></slot>
+            ${endTemplate}
         </div>
     </template>
 `;
