@@ -182,7 +182,9 @@ export class RadioGroup extends FASTElement {
                 radio.setAttribute("tabindex", "0");
                 foundMatchingVal = true;
             } else {
-                radio.setAttribute("tabindex", "-1");
+                if (!this.isInsideToolbar) {
+                    radio.setAttribute("tabindex", "-1");
+                }
                 radio.checked = false;
             }
             radio.addEventListener("change", this.radioChangeHandler);
@@ -217,7 +219,9 @@ export class RadioGroup extends FASTElement {
             this.slottedRadioButtons.forEach((radio: HTMLInputElement) => {
                 if (radio !== changedRadio) {
                     radio.checked = false;
-                    radio.setAttribute("tabindex", "-1");
+                    if (!this.isInsideToolbar) {
+                        radio.setAttribute("tabindex", "-1");
+                    }
                 }
             });
             this.selectedRadio = changedRadio;
