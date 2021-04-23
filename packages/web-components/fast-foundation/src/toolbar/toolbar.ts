@@ -203,13 +203,23 @@ export class Toolbar extends FASTElement {
      *
      * @internal
      */
-    private static reduceFocusableItems(elements: HTMLElement[], element: HTMLElement) {
+    private static reduceFocusableItems(
+        elements: HTMLElement[],
+        element: FASTElement & HTMLElement
+    ) {
         const isRoleRadio = element.getAttribute("role") === "radio";
-        const hasFocusableShadow =
-            element.shadowRoot &&
-            Array.from(element.shadowRoot.querySelectorAll("*")).some(isFocusable);
+        const isFocusableFastElement =
+            element.$fastController?.definition.shadowOptions?.delegatesFocus;
+        const hasFocusableShadow = Array.from(
+            element.shadowRoot?.querySelectorAll("*") ?? []
+        ).some(isFocusable);
 
-        if (isFocusable(element) || isRoleRadio || hasFocusableShadow) {
+        if (
+            isFocusable(element) ||
+            isRoleRadio ||
+            isFocusableFastElement ||
+            hasFocusableShadow
+        ) {
             elements.push(element);
             return elements;
         }
