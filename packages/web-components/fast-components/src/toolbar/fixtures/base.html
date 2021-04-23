@@ -2,40 +2,60 @@
 
 <h2>Default</h2>
 <fast-toolbar>
-    <fast-number-field min="8" max="72" value="12" style="width: fit-content;">
-        Font Size
-    </fast-number-field>
-    <fast-checkbox>One</fast-checkbox>
-    <fast-checkbox>Two</fast-checkbox>
-    <fast-checkbox>Three</fast-checkbox>
+    <button>Button</button>
+    <select>
+        <option>Option 1</option>
+        <option>Second option</option>
+        <option>Option 3</option>
+    </select>
+    <div role="radiogroup">
+        <label for="left">
+            <input type="radio" name="align" id="left" />
+            left
+        </label>
+        <label for="center">
+            <input type="radio" name="align" id="center" />
+            center
+        </label>
+        <label for="right">
+            <input type="radio" name="align" id="right" />
+            right
+        </label>
+    </div>
+    <input type="text" name="text" id="text-input" />
 </fast-toolbar>
 
 <h2>Toolbar with slotted label</h2>
 <fast-toolbar id="toolbar-with-slotted-label">
     <label slot="label">Slotted label</label>
+    <button>One</button>
+    <button>Two</button>
+    <button>Three</button>
 </fast-toolbar>
 
 <h2>Toolbar with external label</h2>
 <label id="toolbar-label" for="toolbar-with-external-label">External label</label>
-<fast-toolbar
-    id="toolbar-with-external-label"
-    aria-labelledby="toolbar-label"
-></fast-toolbar>
+<fast-toolbar id="toolbar-with-external-label" aria-labelledby="toolbar-label">
+    <button>One</button>
+    <button>Two</button>
+    <button>Three</button>
+</fast-toolbar>
 
 <h2>Toolbar with invisible label</h2>
-<fast-toolbar
-    id="toolbar-with-invisible-label"
-    aria-label="Invisible label"
-></fast-toolbar>
+<fast-toolbar id="toolbar-with-invisible-label" aria-label="Invisible label">
+    <button>One</button>
+    <button>Two</button>
+    <button>Three</button>
+</fast-toolbar>
 
 <h2>Vertical orientation</h2>
 <fast-toolbar orientation="vertical">
-    <fast-button>One</fast-button>
-    <fast-button>Two</fast-button>
-    <fast-button>Three</fast-button>
+    <button>One</button>
+    <button>Two</button>
+    <button>Three</button>
 </fast-toolbar>
 
-<h2>Mixed Items</h2>
+<h2>FAST components</h2>
 <fast-toolbar>
     <fast-button>Button</fast-button>
     <fast-radio-group>
@@ -69,13 +89,37 @@
 
 <h2>Disabled Elements</h2>
 <fast-toolbar>
-    <fast-checkbox>Two</fast-checkbox>
     <fast-checkbox disabled>One</fast-checkbox>
+    <fast-checkbox>Two</fast-checkbox>
     <fast-checkbox>Three</fast-checkbox>
+</fast-toolbar>
+
+<fast-toolbar>
+    <fast-checkbox>One</fast-checkbox>
+    <fast-checkbox disabled>Two</fast-checkbox>
+    <fast-checkbox>Three</fast-checkbox>
+</fast-toolbar>
+
+<fast-toolbar>
+    <fast-checkbox>One</fast-checkbox>
+    <fast-checkbox>Two</fast-checkbox>
+    <fast-checkbox disabled>Three</fast-checkbox>
+</fast-toolbar>
+
+<fast-toolbar>
+    <fast-checkbox disabled>One</fast-checkbox>
+    <fast-checkbox disabled>Two</fast-checkbox>
+    <fast-checkbox disabled>Three</fast-checkbox>
 </fast-toolbar>
 
 <h2>RTL Mode</h2>
 <fast-toolbar dir="rtl">
+    <fast-checkbox>One</fast-checkbox>
+    <fast-checkbox>Two</fast-checkbox>
+    <fast-checkbox>Three</fast-checkbox>
+</fast-toolbar>
+
+<fast-toolbar dir="rtl" orientation="vertical">
     <fast-checkbox>One</fast-checkbox>
     <fast-checkbox>Two</fast-checkbox>
     <fast-checkbox>Three</fast-checkbox>
