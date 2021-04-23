@@ -2070,16 +2070,16 @@ export class Toolbar extends FASTElement {
     // @internal
     get activeIndex(): number;
     set activeIndex(value: number);
+    // @internal
+    clickHandler(e: MouseEvent): boolean | void;
     // @internal (undocumented)
     connectedCallback(): void;
     // @internal
     direction: Direction;
     // @internal
-    handleClick(e: MouseEvent): boolean | void;
+    focusinHandler(e: FocusEvent): boolean | void;
     // @internal
-    handleFocusin(e: FocusEvent): boolean | void;
-    // @internal
-    handleKeydown(e: KeyboardEvent): boolean | void;
+    keydownHandler(e: KeyboardEvent): boolean | void;
     orientation: Orientation;
     // @internal
     slottedItems: HTMLElement[];

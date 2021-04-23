@@ -15,6 +15,9 @@ import { ToolbarStyles } from "./toolbar.styles";
     name: "fast-toolbar",
     template: ToolbarTemplate,
     styles: ToolbarStyles,
+    shadowOptions: {
+        delegatesFocus: true,
+    },
 })
 export class FASTToolbar extends Toolbar {}
 

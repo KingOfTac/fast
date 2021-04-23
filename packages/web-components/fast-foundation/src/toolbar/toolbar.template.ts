@@ -15,9 +15,9 @@ export const ToolbarTemplate: ViewTemplate<Toolbar> = html`
         aria-orientation="${x => x.orientation}"
         orientation="${x => x.orientation}"
         role="toolbar"
-        @click="${(x, c) => x.handleClick(c.event as MouseEvent)}"
-        @focusin="${(x, c) => x.handleFocusin(c.event as FocusEvent)}"
-        @keydown="${(x, c) => x.handleKeydown(c.event as KeyboardEvent)}"
+        @click="${(x, c) => x.clickHandler(c.event as MouseEvent)}"
+        @focusin="${(x, c) => x.focusinHandler(c.event as FocusEvent)}"
+        @keydown="${(x, c) => x.keydownHandler(c.event as KeyboardEvent)}"
     >
         <slot name="label"></slot>
         <div class="positioning-region" part="positioning-region">
