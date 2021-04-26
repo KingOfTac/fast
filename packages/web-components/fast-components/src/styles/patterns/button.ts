@@ -32,6 +32,9 @@ import {
     designUnit,
     disabledOpacity,
     focusOutlineWidth,
+    neutralFillStealthActive,
+    neutralFillStealthHover,
+    neutralFillStealthRest,
     outlineWidth,
     typeRampBaseFontSize,
     typeRampBaseLineHeight,
@@ -486,24 +489,21 @@ export const OutlineButtonStyles = css`
  */
 export const StealthButtonStyles = css`
     :host([appearance="stealth"]) {
-        background: ${neutralFillStealthRestBehavior.var};
+        background: ${neutralFillStealthRest};
     }
 
     :host([appearance="stealth"]:hover) {
-        background: ${neutralFillStealthHoverBehavior.var};
+        background: ${neutralFillStealthHover};
     }
 
     :host([appearance="stealth"]:active) {
-        background: ${neutralFillStealthActiveBehavior.var};
+        background: ${neutralFillStealthActive};
     }
 
     :host([appearance="stealth"][disabled]) {
-        background: ${neutralFillStealthRestBehavior.var};
+        background: ${neutralFillStealthRest};
     }
 `.withBehaviors(
-    neutralFillStealthRestBehavior,
-    neutralFillStealthHoverBehavior,
-    neutralFillStealthActiveBehavior,
     forcedColorsStylesheetBehavior(
         css`
             :host([appearance="stealth"]),
