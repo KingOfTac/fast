@@ -8,12 +8,6 @@ import {
 import { SystemColors } from "@microsoft/fast-web-utilities";
 import { heightNumber } from "../size";
 import {
-    neutralFillActiveBehavior,
-    neutralFillHoverBehavior,
-    neutralFillRestBehavior,
-    neutralFillStealthActiveBehavior,
-    neutralFillStealthHoverBehavior,
-    neutralFillStealthRestBehavior,
     neutralFocusBehavior,
     neutralFocusInnerAccentBehavior,
     neutralForegroundRestBehavior,
@@ -32,6 +26,9 @@ import {
     designUnit,
     disabledOpacity,
     focusOutlineWidth,
+    neutralFillActive,
+    neutralFillHover,
+    neutralFillRest,
     neutralFillStealthActive,
     neutralFillStealthHover,
     neutralFillStealthRest,
@@ -51,7 +48,7 @@ export const BaseButtonStyles = css`
         line-height: ${typeRampBaseLineHeight};
         height: calc(${heightNumber} * 1px);
         min-width: calc(${heightNumber} * 1px);
-        background-color: ${neutralFillRestBehavior.var};
+        background-color: ${neutralFillRest};
         color: ${neutralForegroundRestBehavior.var};
         border-radius: calc(${cornerRadius} * 1px);
         fill: currentcolor;
@@ -81,11 +78,11 @@ export const BaseButtonStyles = css`
     }
 
     :host(:hover) {
-        background-color: ${neutralFillHoverBehavior.var};
+        background-color: ${neutralFillHover};
     }
 
     :host(:active) {
-        background-color: ${neutralFillActiveBehavior.var};
+        background-color: ${neutralFillActive};
     }
 
     .control:${focusVisible} {
@@ -101,7 +98,7 @@ export const BaseButtonStyles = css`
 
     :host([disabled]) {
         opacity: ${disabledOpacity};
-        background-color: ${neutralFillRestBehavior.var};
+        background-color: ${neutralFillRest};
         cursor: ${disabledCursor};
     }
 
@@ -132,10 +129,7 @@ export const BaseButtonStyles = css`
         margin-inline-start: 11px;
     }
 `.withBehaviors(
-    neutralFillRestBehavior,
     neutralForegroundRestBehavior,
-    neutralFillHoverBehavior,
-    neutralFillActiveBehavior,
     forcedColorsStylesheetBehavior(
         css`
             :host .control {
