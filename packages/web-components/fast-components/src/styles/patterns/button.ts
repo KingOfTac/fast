@@ -8,10 +8,6 @@ import {
 import { SystemColors } from "@microsoft/fast-web-utilities";
 import { heightNumber } from "../size";
 import {
-    accentForegroundActiveBehavior,
-    accentForegroundCutRestBehavior,
-    accentForegroundHoverBehavior,
-    accentForegroundRestBehavior,
     neutralFillActiveBehavior,
     neutralFillHoverBehavior,
     neutralFillRestBehavior,
@@ -26,7 +22,10 @@ import {
     accentFillActive,
     accentFillHover,
     accentFillRest,
+    accentForegroundActive,
     accentForegroundCut,
+    accentForegroundHover,
+    accentForegroundRest,
     bodyFont,
     cornerRadius,
     density,
@@ -215,7 +214,6 @@ export const AccentButtonStyles = css`
         background: ${accentFillRest};
     }
 `.withBehaviors(
-    accentForegroundCutRestBehavior,
     neutralFocusInnerAccentBehavior,
     forcedColorsStylesheetBehavior(
         css`
@@ -292,16 +290,16 @@ export const HypertextStyles = css`
     :host([appearance="hypertext"]) .control:link,
     :host([appearance="hypertext"]) .control:visited {
         background: transparent;
-        color: ${accentForegroundRestBehavior.var};
-        border-bottom: calc(${outlineWidth} * 1px) solid ${accentForegroundRestBehavior.var};
+        color: ${accentForegroundRest};
+        border-bottom: calc(${outlineWidth} * 1px) solid ${accentForegroundRest};
     }
 
     :host([appearance="hypertext"]) .control:hover {
-        border-bottom-color: ${accentForegroundHoverBehavior.var};
+        border-bottom-color: ${accentForegroundHover};
     }
 
     :host([appearance="hypertext"]) .control:active {
-        border-bottom-color: ${accentForegroundActiveBehavior.var};
+        border-bottom-color: ${accentForegroundActive};
     }
 
     :host([appearance="hypertext"]) .control:${focusVisible} {
@@ -309,9 +307,6 @@ export const HypertextStyles = css`
         margin-bottom: calc(calc(${outlineWidth} - ${focusOutlineWidth}) * 1px);
     }
 `.withBehaviors(
-    accentForegroundRestBehavior,
-    accentForegroundHoverBehavior,
-    accentForegroundActiveBehavior,
     neutralFocusBehavior,
     forcedColorsStylesheetBehavior(
         css`
@@ -336,7 +331,7 @@ export const HypertextStyles = css`
 export const LightweightButtonStyles = css`
     :host([appearance="lightweight"]) {
         background: transparent;
-        color: ${accentForegroundRestBehavior.var};
+        color: ${accentForegroundRest};
     }
 
     :host([appearance="lightweight"]) .control {
@@ -348,11 +343,11 @@ export const LightweightButtonStyles = css`
     }
 
     :host([appearance="lightweight"]:hover) {
-        color: ${accentForegroundHoverBehavior.var};
+        color: ${accentForegroundHover};
     }
 
     :host([appearance="lightweight"]:active) {
-        color: ${accentForegroundActiveBehavior.var};
+        color: ${accentForegroundActive};
     }
 
     :host([appearance="lightweight"]) .content {
@@ -369,11 +364,11 @@ export const LightweightButtonStyles = css`
     }
 
     :host([appearance="lightweight"]:hover) .content::before {
-        background: ${accentForegroundHoverBehavior.var};
+        background: ${accentForegroundHover};
     }
 
     :host([appearance="lightweight"]:active) .content::before {
-        background: ${accentForegroundActiveBehavior.var};
+        background: ${accentForegroundActive};
     }
 
     :host([appearance="lightweight"]) .control:${focusVisible} .content::before {
@@ -385,10 +380,6 @@ export const LightweightButtonStyles = css`
         background: transparent;
     }
 `.withBehaviors(
-    accentForegroundRestBehavior,
-    accentForegroundHoverBehavior,
-    accentForegroundActiveBehavior,
-    accentForegroundHoverBehavior,
     neutralForegroundRestBehavior,
     forcedColorsStylesheetBehavior(
         css`
