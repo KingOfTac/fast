@@ -8,9 +8,6 @@ import {
 import { SystemColors } from "@microsoft/fast-web-utilities";
 import { heightNumber } from "../size";
 import {
-    accentFillActiveBehavior,
-    accentFillHoverBehavior,
-    accentFillRestBehavior,
     accentForegroundActiveBehavior,
     accentForegroundCutRestBehavior,
     accentForegroundHoverBehavior,
@@ -26,6 +23,9 @@ import {
     neutralForegroundRestBehavior,
 } from "../recipes";
 import {
+    accentFillActive,
+    accentFillHover,
+    accentFillRest,
     accentForegroundCut,
     bodyFont,
     cornerRadius,
@@ -195,16 +195,16 @@ export const BaseButtonStyles = css`
  */
 export const AccentButtonStyles = css`
     :host([appearance="accent"]) {
-        background: ${accentFillRestBehavior.var};
+        background: ${accentFillRest};
         color: ${accentForegroundCut};
     }
 
     :host([appearance="accent"]:hover) {
-        background: ${accentFillHoverBehavior.var};
+        background: ${accentFillHover};
     }
 
     :host([appearance="accent"]:active) .control:active {
-        background: ${accentFillActiveBehavior.var};
+        background: ${accentFillActive};
     }
 
     :host([appearance="accent"]) .control:${focusVisible} {
@@ -212,13 +212,10 @@ export const AccentButtonStyles = css`
     }
 
     :host([appearance="accent"][disabled]) {
-        background: ${accentFillRestBehavior.var};
+        background: ${accentFillRest};
     }
 `.withBehaviors(
-    accentFillRestBehavior,
     accentForegroundCutRestBehavior,
-    accentFillHoverBehavior,
-    accentFillActiveBehavior,
     neutralFocusInnerAccentBehavior,
     forcedColorsStylesheetBehavior(
         css`
@@ -436,15 +433,15 @@ export const LightweightButtonStyles = css`
 export const OutlineButtonStyles = css`
     :host([appearance="outline"]) {
         background: transparent;
-        border-color: ${accentFillRestBehavior.var};
+        border-color: ${accentFillRest};
     }
 
     :host([appearance="outline"]:hover) {
-        border-color: ${accentFillHoverBehavior.var};
+        border-color: ${accentFillHover};
     }
 
     :host([appearance="outline"]:active) {
-        border-color: ${accentFillActiveBehavior.var};
+        border-color: ${accentFillActive};
     }
 
     :host([appearance="outline"]) .control {
@@ -457,12 +454,9 @@ export const OutlineButtonStyles = css`
     }
 
     :host([appearance="outline"][disabled]) {
-        border-color: ${accentFillRestBehavior.var};
+        border-color: ${accentFillRest};
     }
 `.withBehaviors(
-    accentFillRestBehavior,
-    accentFillHoverBehavior,
-    accentFillActiveBehavior,
     neutralFocusBehavior,
     forcedColorsStylesheetBehavior(
         css`
