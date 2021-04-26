@@ -26,6 +26,7 @@ import {
     neutralForegroundRestBehavior,
 } from "../recipes";
 import {
+    accentForegroundCut,
     bodyFont,
     cornerRadius,
     density,
@@ -195,7 +196,7 @@ export const BaseButtonStyles = css`
 export const AccentButtonStyles = css`
     :host([appearance="accent"]) {
         background: ${accentFillRestBehavior.var};
-        color: ${accentForegroundCutRestBehavior.var};
+        color: ${accentForegroundCut};
     }
 
     :host([appearance="accent"]:hover) {
