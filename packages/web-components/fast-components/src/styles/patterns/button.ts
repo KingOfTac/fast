@@ -8,7 +8,6 @@ import {
 import { SystemColors } from "@microsoft/fast-web-utilities";
 import { heightNumber } from "../size";
 import {
-    neutralFocusBehavior,
     neutralFocusInnerAccentBehavior,
     neutralForegroundRestBehavior,
 } from "../recipes";
@@ -32,6 +31,7 @@ import {
     neutralFillStealthActive,
     neutralFillStealthHover,
     neutralFillStealthRest,
+    neutralFocus,
     outlineWidth,
     typeRampBaseFontSize,
     typeRampBaseLineHeight,
@@ -86,10 +86,8 @@ export const BaseButtonStyles = css`
     }
 
     .control:${focusVisible} {
-        border: calc(${outlineWidth} * 1px) solid ${neutralFocusBehavior.var};
-        box-shadow: 0 0 0 calc((${focusOutlineWidth} - ${outlineWidth}) * 1px) ${
-    neutralFocusBehavior.var
-};
+        border: calc(${outlineWidth} * 1px) solid ${neutralFocus};
+        box-shadow: 0 0 0 calc((${focusOutlineWidth} - ${outlineWidth}) * 1px) ${neutralFocus};
     }
 
     .control::-moz-focus-inner {
@@ -300,11 +298,10 @@ export const HypertextStyles = css`
     }
 
     :host([appearance="hypertext"]) .control:${focusVisible} {
-        border-bottom: calc(${focusOutlineWidth} * 1px) solid ${neutralFocusBehavior.var};
+        border-bottom: calc(${focusOutlineWidth} * 1px) solid ${neutralFocus};
         margin-bottom: calc(calc(${outlineWidth} - ${focusOutlineWidth}) * 1px);
     }
 `.withBehaviors(
-    neutralFocusBehavior,
     forcedColorsStylesheetBehavior(
         css`
             :host([appearance="hypertext"]:hover) {
@@ -437,15 +434,14 @@ export const OutlineButtonStyles = css`
     }
 
     :host([appearance="outline"]) .control:${focusVisible} {
-        box-shadow: 0 0 0 calc((${focusOutlineWidth} - ${outlineWidth}) * 1px) ${neutralFocusBehavior.var};
-        border-color: ${neutralFocusBehavior.var};
+        box-shadow: 0 0 0 calc((${focusOutlineWidth} - ${outlineWidth}) * 1px) ${neutralFocus};
+        border-color: ${neutralFocus};
     }
 
     :host([appearance="outline"][disabled]) {
         border-color: ${accentFillRest};
     }
 `.withBehaviors(
-    neutralFocusBehavior,
     forcedColorsStylesheetBehavior(
         css`
             :host([appearance="outline"]) .control {
