@@ -147,15 +147,14 @@ export const keyCodeWindowsRight: number = 92;
 /**
  * String values for use with KeyboardEvent.key
  */
-export const keyArrowDown = "ArrowDown";
-export const keyArrowLeft = "ArrowLeft";
-export const keyArrowRight = "ArrowRight";
-export const keyArrowUp = "ArrowUp";
-
-export const keyEnter = "Enter";
-export const keyEscape = "Escape";
-export const keySpace = " ";
-export const keyTab = "Tab";
+export const keyArrowDown: string = "ArrowDown";
+export const keyArrowLeft: string = "ArrowLeft";
+export const keyArrowRight: string = "ArrowRight";
+export const keyArrowUp: string = "ArrowUp";
+export const keyEnter: string = "Enter";
+export const keyEscape: string = "Escape";
+export const keySpace: string = " ";
+export const keyTab: string = "Tab";
 
 export enum ArrowKeys {
     ArrowDown = "ArrowDown",
