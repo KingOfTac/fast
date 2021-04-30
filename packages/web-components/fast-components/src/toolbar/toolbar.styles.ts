@@ -21,6 +21,7 @@ export const ToolbarStyles: ElementStyles = css`
         --toolbar-item-gap: calc((var(--design-unit) + calc(var(--density) + 2)) * 1px);
         background-color: ${neutralFillCardRestBehavior.var};
         border-radius: calc(var(--corner-radius) * 1px);
+        fill: currentcolor;
         padding: var(--toolbar-item-gap);
     }
 
@@ -46,6 +47,19 @@ export const ToolbarStyles: ElementStyles = css`
 
     :host([orientation="vertical"]) ::slotted(:not([slot])) {
         margin: var(--toolbar-item-gap) 0;
+    }
+
+    .start,
+    .end {
+        display: flex;
+        margin: auto;
+        margin-inline: 0;
+    }
+
+    ::slotted(svg) {
+        ${/* Glyph size is temporary - replace when adaptive typography is figured out */ ""}
+        width: 16px;
+        height: 16px;
     }
 `.withBehaviors(
     neutralFillCardRestBehavior,
